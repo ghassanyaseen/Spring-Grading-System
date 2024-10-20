@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e9f5e9; /* Light green background */
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #000000;
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #28a745; /* Green button */
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .btn-primary:focus {
+            box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5); /* Green shadow */
+        }
+
+        .btn-logout {
+            background-color: #dc3545; /* Red button for logout */
+            border: none;
+        }
+
+        .btn-logout:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+
+        select {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Instructor Dashboard</h1>
+    <form action="/instructor" method="post">
+        <div class="form-group">
+            <label for="action">Choose an action:</label>
+            <select class="form-control" id="action" name="action">
+                <option value="showCourses">Show Courses</option>
+                <option value="CoursesManagement">Show Students</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+
+    <!-- Logout button -->
+    <a href="/login/logout" class="btn btn-logout btn-block mt-3">Logout</a>
+</div>
+</body>
+</html>

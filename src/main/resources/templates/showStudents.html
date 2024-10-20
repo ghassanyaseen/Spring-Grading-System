@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Students</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e9f5e9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 800px;
+      width: 100%;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-align: center;
+      color: #000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f4f4f4;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      color: #666;
+    }
+
+    select, input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    button:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+      text-align: center;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Students in Course</h1>
+  <form action="/instructor/enterGrades" method="post">
+    <input type="hidden" name="courseName" th:value="${courseName}" />
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Student Username</th>
+        <th>Grade</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="student : ${students}">
+        <td th:text="${student.username}">Student Username</td>
+        <td th:text="${student.grade != null ? student.grade : 'Not assigned yet'}">Grade</td>
+      </tr>
+      </tbody>
+    </table>
+
+    <h2>Enter Grades</h2>
+    <label for="studentUsername">Student Username:</label>
+    <select class="form-control" id="studentUsername" name="studentUsername">
+      <option th:each="student : ${students}" th:value="${student.username}" th:text="${student.username}">Student</option>
+    </select>
+
+    <label for="grade">Grade:</label>
+    <input class="form-control" type="number" id="grade" name="grade" required />
+
+    <button type="submit" class="btn btn-primary mt-3">Submit Grade</button>
+  </form>
+
+  <a href="/instructor" class="mt-4">Back to Dashboard</a>
+</div>
+</body>
+</html>

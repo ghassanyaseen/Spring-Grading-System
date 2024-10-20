@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #444;
+      margin-top: 20px;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .form-section {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+
+    .form-section h2 {
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 1.5em;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      color: #666;
+      font-weight: bold;
+    }
+
+    input[type="text"], input[type="password"], select {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      padding: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.3s;
+      margin-top: 15px;
+    }
+
+    button:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+    }
+
+    .logout-btn {
+      background-color: #dc3545;
+      border: none;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 1em;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+
+    .logout-btn:hover {
+      background-color: #c82333;
+    }
+
+    .message-container {
+      margin-top: 20px;
+    }
+
+    .message-container p {
+      padding: 10px;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .message-container p.success {
+      background-color: #d4edda;
+      color: #155724;
+    }
+
+    .message-container p.error {
+      background-color: #f8d7da;
+      color: #721c24;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Admin Dashboard</h1>
+
+  <!-- Logout button -->
+  <a href="/login/logout" class="logout-btn">Logout</a>
+
+  <!-- Display Success or Error Messages from Session -->
+  <div class="message-container">
+    <!-- Success message -->
+    <p th:if="${session.message}" th:text="${session.message}" class="success"></p>
+
+    <!-- Error message -->
+    <p th:if="${session.error}" th:text="${session.error}" class="error"></p>
+  </div>
+
+  <div class="form-section">
+    <h2>Create User</h2>
+    <form action="/admin/createUser" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="showPassword" onclick="togglePasswordVisibility()">
+        <label for="showPassword">Show Password</label>
+      </div>
+
+      <label for="type">User Type:</label>
+      <select id="type" name="type">
+        <option value="student">Student</option>
+        <option value="instructor">Instructor</option>
+        <option value="admin">Admin</option>
+      </select>
+
+      <button type="submit">Create User</button>
+    </form>
+  </div>
+
+  <div class="form-section">
+    <h2>Create Course</h2>
+    <form action="/admin/createCourse" method="post">
+      <label for="courseName">Course Name:</label>
+      <input type="text" id="courseName" name="courseName" required>
+
+      <label for="instructorUsername">Instructor Username:</label>
+      <select id="instructorUsername" name="instructorUsername" required>
+        <option th:each="instructor : ${instructors}" th:value="${instructor}" th:text="${instructor}"></option>
+      </select>
+
+      <button type="submit">Create Course</button>
+    </form>
+  </div>
+
+  <div class="form-section">
+    <h2>Enroll Student in Course</h2>
+    <form action="/admin/enrollStudent" method="post">
+      <label for="studentUsername">Student Username:</label>
+      <select id="studentUsername" name="studentUsername" required>
+        <option th:each="student : ${students}" th:value="${student}" th:text="${student}"></option>
+      </select>
+
+      <label for="courseName">Course Name:</label>
+      <select id="courseName" name="courseName" required>
+        <option th:each="course : ${courses}" th:value="${course}" th:text="${course}"></option>
+      </select>
+
+      <button type="submit">Enroll Student</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

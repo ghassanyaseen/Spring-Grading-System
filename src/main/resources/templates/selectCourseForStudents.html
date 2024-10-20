@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Course for Students</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e9f5e9; /* Light green background */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #000;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      color: #666;
+    }
+
+    .btn-primary {
+      background-color: #28a745;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #218838;
+    }
+
+    .btn-primary:focus {
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    }
+
+    a {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Select a Course to View Students</h1>
+  <form action="/instructor/viewStudents" method="post">
+    <div class="form-group">
+      <label for="courseName">Course Name:</label>
+      <select class="form-control" id="courseName" name="courseName">
+        <option th:each="course : ${courses}" th:value="${course}" th:text="${course}">Course</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </form>
+  <a href="/instructor">Back to Dashboard</a>
+</div>
+</body>
+</html>

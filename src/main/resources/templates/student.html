@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #e9f5e9;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      color: #000000;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background-color: #28a745;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background-color: #218838;
+    }
+
+    .btn-primary:focus {
+      box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
+    }
+
+    .btn-logout {
+      background-color: #dc3545; /* Red button */
+      border: none;
+    }
+
+    .btn-logout:hover {
+      background-color: #c82333; /* Darker red on hover */
+    }
+  </style>
+</head>
+<body>
+<div class="container mt-5">
+  <h1>Welcome, Student!</h1>
+  <form action="/student" method="post">
+    <div class="form-group">
+      <label for="options">Choose an option:</label>
+      <select id="options" name="options" class="form-control">
+        <option value="showGrades">Show Grades</option>
+        <option value="showGPA">Show GPA</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+  <!-- Logout button -->
+  <a href="/login/logout" class="btn btn-logout mt-3">Logout</a>
+</div>
+</body>
+</html>
